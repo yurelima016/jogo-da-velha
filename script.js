@@ -8,8 +8,14 @@ const xIcon = '<i class="bi bi-x-lg"></i>';
 const oIcon = '<i class="bi bi-circle"></i>';
 
 let currentPlayer = "X";
+const playerBadge = document.getElementById("actualPlayer");
 
 const board = document.getElementById("board");
+const blackBackground = document.getElementById("black-bg");
+const popup = document.getElementById("popup");
+const winnerIcon = document.getElementById("winnerIcon");
+const winnerLabel = document.getElementById("winnerLabel");
+const closePopupBtn = document.getElementById("close-btn");
 
 function clearBoard() {
   gameBoard = [
@@ -20,6 +26,7 @@ function clearBoard() {
 
   document.querySelectorAll(".slots").forEach((slot) => (slot.innerHTML = ""));
   currentPlayer = "X";
+  updatePlayerBadge();
 }
 
 function checkWinner() {
@@ -60,6 +67,39 @@ function checkDraw() {
   return !gameBoard.flat().includes("");
 }
 
+function showWinnerPopup(winner, result) {
+  blackBackground.classList.add("active");
+  popup.classList.add("active");
+
+  if (result === "gameWon") {
+    winnerIcon.innerHTML = winner === "X" ? xIcon : oIcon;
+    winnerLabel.textContent = `Jogador ${winner} venceu!`;
+  } else {
+    winnerIcon.innerHTML = xIcon + oIcon;
+    winnerLabel.textContent = `Empate!`;
+  }
+}
+
+function updatePlayerBadge() {
+  playerBadge.textContent = `Player ${currentPlayer}`;
+  playerBadge.classList.remove("playerX", "playerO");
+  if (currentPlayer === "X") {
+    playerBadge.classList.add("playerX");
+  } else {
+    playerBadge.classList.add("playerO");
+  }
+}
+
+updatePlayerBadge();
+
+closePopupBtn.addEventListener("click", () => {
+  blackBackground.classList.remove("active");
+  winnerIcon.innerHTML = "";
+  winnerLabel.textContent = "";
+  popup.classList.remove("active");
+  clearBoard();
+});
+
 board.addEventListener("click", (e) => {
   const clickedSlot = e.target.closest(".slots");
 
@@ -74,18 +114,16 @@ board.addEventListener("click", (e) => {
 
     setTimeout(() => {
       if (checkWinner()) {
-        alert(`Jogador ${currentPlayer} venceu!`);
-        clearBoard();
+        showWinnerPopup(currentPlayer, "gameWon");
         return;
       } else if (checkDraw()) {
-        alert("Empate!");
-        clearBoard();
+        showWinnerPopup(currentPlayer, "gameDraw");
         return;
       } else {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
+        updatePlayerBadge();
       }
     }, 10);
   } else {
-    alert("Slot já preenchido! Escolha outro.");
   }
 });

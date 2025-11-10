@@ -11,6 +11,8 @@
     <title>Jogo da Velha</title>
   </head>
   <body>
+    <div id="actualPlayer" class="actualPlayer"></div>
+
     <section id="board">
       <div class="slots" id="slot1" data-row="0" data-col="0"></div>
       <div class="slots" id="slot2" data-row="0" data-col="1"></div>
@@ -22,6 +24,18 @@
       <div class="slots" id="slot8" data-row="2" data-col="1"></div>
       <div class="slots" id="slot9" data-row="2" data-col="2"></div>
     </section>
+
+    <section class="black-bg" id="black-bg"></section>
+    <div class="popup" id="popup">
+      <div class="close-popup" id="close-btn">
+        <i class="bi bi-x"></i>
+      </div>
+      <div class="iconContainer" id="winnerIcon"></div>
+      <h1 class="winnerContainer" id="winnerLabel"></h1>
+    </div>
+
+    <div class="light-spot" id="light-top-right"></div>
+    <div class="light-spot" id="light-bottom-left"></div>
     <script src="script.js"></script>
   </body>
 </html>
