@@ -9,6 +9,7 @@ const oIcon = '<i class="bi bi-circle"></i>';
 
 let currentPlayer = "X";
 const playerBadge = document.getElementById("actualPlayer");
+let badgeTimeout;
 
 const board = document.getElementById("board");
 const blackBackground = document.getElementById("black-bg");
@@ -81,13 +82,25 @@ function showWinnerPopup(winner, result) {
 }
 
 function updatePlayerBadge() {
-  playerBadge.textContent = `Player ${currentPlayer}`;
+  if (!playerBadge) return;
+
+  playerBadge.classList.remove("hidden", "counting");
+  clearTimeout(badgeTimeout);
+  void playerBadge.offsetWidth;
+
+  playerBadge.textContent = `Vez do jogador ${currentPlayer}`;
   playerBadge.classList.remove("playerX", "playerO");
   if (currentPlayer === "X") {
     playerBadge.classList.add("playerX");
   } else {
     playerBadge.classList.add("playerO");
   }
+
+  playerBadge.classList.add("counting");
+
+  badgeTimeout = setTimeout(() => {
+    playerBadge.classList.add("hidden");
+  }, 5000);
 }
 
 updatePlayerBadge();

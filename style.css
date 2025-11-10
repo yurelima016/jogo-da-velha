@@ -7,6 +7,15 @@
   --o-color: #0091ff;
 }
 
+@keyframes timerBar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -26,14 +35,16 @@ body {
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  gap: 5%;
 }
 
 .actualPlayer {
+  position: absolute;
+  top: 3%;
+  left: 1%;
   width: 40vmin;
-  max-width: 170px;
+  max-width: 200px;
   height: 12vmin;
   max-height: 45px;
   border-radius: 8px;
@@ -42,7 +53,33 @@ body {
   align-items: center;
   font-size: clamp(1rem, 4vmin, 1.2rem);
   color: var(--grid);
-  transition: background-color 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease, background-color 0.3s ease,
+    visibility 0.5s ease;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.actualPlayer::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 0%;
+  z-index: -1;
+}
+
+.actualPlayer.counting::after {
+  animation: timerBar 5s linear forwards;
+}
+
+.actualPlayer.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .playerX {
@@ -182,9 +219,13 @@ body {
   box-shadow: 0 0 150px 70px var(--o-color);
 }
 
-@media (max-width: 968px) {
+@media (max-width: 700px) {
   .light-spot {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+  }
+  .actualPlayer {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
