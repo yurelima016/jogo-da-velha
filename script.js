@@ -18,6 +18,11 @@ const winnerIcon = document.getElementById("winnerIcon");
 const winnerLabel = document.getElementById("winnerLabel");
 const closePopupBtn = document.getElementById("close-btn");
 
+let scoreX = 0;
+let scoreO = 0;
+const scoreXElement = document.getElementById("scoreX");
+const scoreOElement = document.getElementById("scoreO");
+
 function clearBoard() {
   gameBoard = [
     ["", "", ""],
@@ -127,6 +132,14 @@ board.addEventListener("click", (e) => {
 
     setTimeout(() => {
       if (checkWinner()) {
+        if (currentPlayer === "X") {
+          scoreX++;
+          scoreXElement.textContent = scoreX;
+        } else {
+          scoreO++;
+          scoreOElement.textContent = scoreO;
+        }
+
         showWinnerPopup(currentPlayer, "gameWon");
         return;
       } else if (checkDraw()) {

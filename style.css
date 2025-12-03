@@ -229,3 +229,63 @@ body {
     transform: translateX(-50%);
   }
 }
+
+.scoreboard {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 0 15px;
+  height: 45px;
+  color: var(--grid);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  font-size: 1.1rem;
+}
+
+.score-label {
+  font-weight: bold;
+  padding-right: 15px;
+  margin-right: 15px;
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: 1px;
+}
+
+.score-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-item i {
+  font-size: 1.2rem;
+}
+
+.x-score {
+  padding-right: 15px;
+  margin-right: 15px;
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.x-score i {
+  color: var(--x-color);
+}
+
+.o-score i {
+  color: var(--o-color);
+}
+
+@media (max-width: 700px) {
+  .scoreboard {
+    top: auto;
+    bottom: 5%;
+    right: 50%;
+    transform: translateX(50%);
+    width: 90%;
+    justify-content: center;
+    max-width: 350px;
+  }
+}
