@@ -96,8 +96,8 @@ body {
   max-width: 800px;
   max-height: 800px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
   gap: 1%;
 }
 
@@ -219,17 +219,6 @@ body {
   box-shadow: 0 0 150px 70px var(--o-color);
 }
 
-@media (max-width: 700px) {
-  .light-spot {
-    width: 150px;
-    height: 150px;
-  }
-  .actualPlayer {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
 .scoreboard {
   position: absolute;
   top: 3%;
@@ -278,7 +267,22 @@ body {
   color: var(--o-color);
 }
 
+@media (max-width: 900px) {
+  #board {
+    width: 78vmin;
+    height: 78vmin;
+  }
+}
+
 @media (max-width: 700px) {
+  .light-spot {
+    width: 150px;
+    height: 150px;
+  }
+  .actualPlayer {
+    left: 50%;
+    transform: translateX(-50%);
+  }
   .scoreboard {
     top: auto;
     bottom: 5%;
